@@ -6,12 +6,6 @@ def main():
     #começar
     pyautogui.FAILSAFE = True
 
-  
-
-    #fazer qualquer coisa
-    pyautogui.size()
-    pyautogui.position()
-
 
     #Codigos para descobrir a posição das coisas 
     print('Press Ctrl-C to quit.')
@@ -31,14 +25,33 @@ def main():
     #pyautogui.drag(30, 0, 2, button='right')
 
     #ver onde fica a foto 
+    #undock
+    def UndockMine():
+        buttonUndock = pyautogui.locateOnScreen('undock.png', confidence=0.9)
+        pyautogui.click(buttonundock)
+        time.sleep(7)
+        #open mining tab 
+        buttonMiningO = pyautogui.locateOnScreen('miningOverview.png', confidence=0.9)
+        pyautogui.click(buttonMiningO)
+        time.sleep(1)
+        #go to mining belt
+        buttonAsteroidBelt = pyautogui.locateOnScreen('AsteroidBelt.png', confidence=0.9)
+        pyautogui.click(buttonAsteroidBelt)
+        time.sleep(1)
+        #go to mining belt
+        buttonWarp = pyautogui.locateOnScreen('warp.png', confidence=0.9)
+        pyautogui.click(buttonWarp)
+        time.sleep(15)
+        #aproch random asteroid
+        buttonVeldspar = pyautogui.locateOnScreen('concenVeldspar.png', confidence=0.9)
+        pyautogui.click(buttonVeldspar)
+        time.sleep(10)
+        #use scan
+        buttonScan = pyautogui.locateOnScreen('scan.png', confidence=0.9)
+        pyautogui.click(buttonScan)
+        time.sleep(15)
 
-    buttonLock = pyautogui.locateOnScreen('lupa.png', confidence=0.9)
-    pyautogui.click('lupa.png')
 
-
-#
-    im = pyautogui.screenshot()
-    im.getpixel((100, 200))
 
 
 if __name__ == "__main__":
@@ -47,17 +60,19 @@ if __name__ == "__main__":
 
 
 
-    #undock
-    #time.sleep(7)
-    #minigOverview
-    #AsteriodBelt
-    #Warp
-    #time.sleep(19)
-    #aproch 20km
+    #undock §
+    #time.sleep(7) §
+    #minigOverview §
+    #AsteriodBelt §2
+    #Warp §
+    #time.sleep(19) §
+    #aproch 20km §
     #use scan
     #find in scan best asteriod with most volume 
     #click on it 
     #aproch 
     #lock 
     #activate both miners
+    #do pixel matching in the last part of the box, in the mining ore hold
+    #if matched go to station
     #
