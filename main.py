@@ -2,9 +2,66 @@
 import pyautogui,sys
 import time
 
+
+
+
+
+def undock():
+    #localiza o centro da imagem UNDOCK
+    buttonUndockPos = pyautogui.locateOnScreen('undock.png', confidence=0.6)
+    buttonUndock=pyautogui.center(buttonUndockPos)
+    btUx, btUy = buttonUndock
+    pyautogui.moveTo(btUx, btUy)
+    pyautogui.click()
+    print("Undocking...")
+    for each in range(0,12):
+        print(each)
+        time.sleep(1)
+
+def minOverview():
+    #Mining Overview
+    buttonMiningOPosX = 1615
+    buttonMiningOPosY = 191
+    pyautogui.moveTo(buttonMiningOPosX, buttonMiningOPosY)
+    pyautogui.click()
+    print("Mining opended...")
+    time.sleep(1)
+
+def minBelt():
+    #go to mining belt
+    buttonAsteroidBeltX = 1653
+    buttonAsteroidBeltY = 263
+    pyautogui.moveTo(buttonAsteroidBeltX, buttonAsteroidBeltY)
+    pyautogui.click()
+    print("Mining belt locked...")
+    time.sleep(15)
+
+def warp():
+    #go to mining belt
+    pyautogui.press('s') 
+    print("Warping...")
+    time.sleep(1)
+
+
+
+
+
+
+
 def main():
     #começar
     pyautogui.FAILSAFE = True
+
+    #foca na janela do EVE
+    pyautogui.moveTo(650, 70)
+    pyautogui.click()
+
+    ######funçoes 
+    #undock()
+    #minOverview()
+    warp()
+    minBelt()
+    
 
 
     #Codigos para descobrir a posição das coisas 
@@ -17,46 +74,11 @@ def main():
             print('\b' * len(positionStr), end='', flush=True)
     except KeyboardInterrupt:
         print('\n')
-
-
-    ##codigos para o mouse 
-    #pyautogui.moveTo(100, 200)  # moves mouse to X of 100, Y of 200.
-    #pyautogui.dragTo(300, 400, 2, button='left')  # drag mouse to X of 300, Y of 400 over 2 seconds while holding down left mouse button
-    #pyautogui.drag(30, 0, 2, button='right')
-
-    #ver onde fica a foto 
-    #undock
-    def UndockMine():
-        buttonUndock = pyautogui.locateOnScreen('undock.png', confidence=0.9)
-        pyautogui.click(buttonundock)
-        time.sleep(7)
-        #open mining tab 
-        buttonMiningO = pyautogui.locateOnScreen('miningOverview.png', confidence=0.9)
-        pyautogui.click(buttonMiningO)
-        time.sleep(1)
-        #go to mining belt
-        buttonAsteroidBelt = pyautogui.locateOnScreen('AsteroidBelt.png', confidence=0.9)
-        pyautogui.click(buttonAsteroidBelt)
-        time.sleep(1)
-        #go to mining belt
-        buttonWarp = pyautogui.locateOnScreen('warp.png', confidence=0.9)
-        pyautogui.click(buttonWarp)
-        time.sleep(15)
-        #aproch random asteroid
-        buttonVeldspar = pyautogui.locateOnScreen('concenVeldspar.png', confidence=0.9)
-        pyautogui.click(buttonVeldspar)
-        time.sleep(10)
-        #use scan
-        buttonScan = pyautogui.locateOnScreen('scan.png', confidence=0.9)
-        pyautogui.click(buttonScan)
-        time.sleep(15)
-
-
+      
 
 
 if __name__ == "__main__":
     main()
-
 
 
 
