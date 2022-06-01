@@ -1,8 +1,7 @@
 
 import pyautogui,sys
 import time
-
-
+import keyboard
 
 
 
@@ -20,7 +19,7 @@ def undock():
 
 def minOverview():
     #Mining Overview
-    buttonMiningOPosX = 1615
+    buttonMiningOPosX = 1640
     buttonMiningOPosY = 191
     pyautogui.moveTo(buttonMiningOPosX, buttonMiningOPosY)
     pyautogui.click()
@@ -34,16 +33,16 @@ def minBelt():
     pyautogui.moveTo(buttonAsteroidBeltX, buttonAsteroidBeltY)
     pyautogui.click()
     print("Mining belt locked...")
-    time.sleep(15)
+    time.sleep(20)
 
 def warp():
     #go to mining belt
     pyautogui.press('s') 
     print("Warping...")
-    time.sleep(10)
+    time.sleep(2)
 
 #see if the ore hold is full 
-def oreHold():
+def fullOreHold():
     im = pyautogui.screenshot()
     pyautogui.moveTo(339, 590)
     im.getpixel((339,590))
@@ -84,10 +83,22 @@ def miningHold():
     pyautogui.dragTo(142, 452, 2, button='left')
     print("items transfered..")
 
+def lockVeldspar():
+    #localiza o centro da imagem UNDOCK
+    buttonLockVeldPos = pyautogui.locateOnScreen('concentratedVeld.png', confidence=0.7)
+    buttonLockVeld=pyautogui.center(buttonLockVeldPos)
+    btLx, btLy = buttonLockVeld
+    pyautogui.moveTo(btLx, btLy)
+    pyautogui.click()
+    print("Locked veldspar...")
+    time.sleep(1)
+
 
 
 
 def main():
+
+
     #começar
     pyautogui.FAILSAFE = True
 
@@ -96,13 +107,15 @@ def main():
     pyautogui.click()
     #######
 
+   
     ######funçoes######
-
     #undock()
     #minOverview()
     #warp()
     #minBelt()
-    #oreHold()
+    lockVeldspar()
+    #fullOreHold()
+
 
 
     #generalOverview()
@@ -110,19 +123,6 @@ def main():
     #warp()
     #dock()
     #miningHold()
-
-
-    #Codigos para descobrir a posição das coisas 
-    print('Press Ctrl-C to quit.')
-    try:
-        while True:
-            x, y = pyautogui.position()
-            positionStr = 'X: ' + str(x).rjust(4) + ' Y: ' + str(y).rjust(4)
-            print(positionStr, end='')
-            print('\b' * len(positionStr), end='', flush=True)
-    except KeyboardInterrupt:
-        print('\n')
-      
 
 
 if __name__ == "__main__":
