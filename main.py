@@ -113,9 +113,16 @@ def lockVeldspar():
 
 def scanedVeldpar5k():
     #localiza o centro da imagem UNDOCK
-    buttonLockVeldPos = pyautogui.locateOnScreen('scanedVeldspar.png', confidence=0.8)
-    buttonLockVeld=pyautogui.center(buttonLockVeldPos)
-    btLx, btLy = buttonLockVeld
+    listasteroid = pyautogui.locateAllOnScreen('scanedVeldspar.png', confidence=0.7)
+    #seleciona todos os asteroides e escolhe o ultimo da lista, 
+    #neste caso o asteroide com mais veldespar
+    for asteroid in listasteroid:
+        print("x=",asteroid[0])
+        print("y=",asteroid[1])
+        if  asteroid[1] > 1: 
+            btLx= asteroid[0]
+            btLy= asteroid[1] 
+    
     pyautogui.moveTo(btLx, btLy)
     pyautogui.click()
     print("Locked veldspar...")
@@ -177,7 +184,7 @@ def main():
     #######
 
    
-    #for i in range(0,5):
+    for i in range(0,5):
         #print("------Reset nº",i," Mining again------")
         #undock()
         #minOverview()
@@ -186,7 +193,7 @@ def main():
         #lockVeldspar()
         #aproch()
         #scan()      
-        #scanedVeldpar5k()
+        scanedVeldpar5k()
         #ActivateMiners()
     
 
