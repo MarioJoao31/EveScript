@@ -40,14 +40,14 @@ def warp():
     pyautogui.moveTo(1619, 108)
     pyautogui.click()
     print("Warping...")
-    time.sleep(32)
+    time.sleep(39)
 
 def warp2():
     #go to mining belt
     pyautogui.moveTo(1619, 108)
     pyautogui.click()
     print("Warping...")
-    time.sleep(35)
+    time.sleep(39)
 
 #see if the ore hold is full 
 def fullOreHold():
@@ -58,6 +58,9 @@ def fullOreHold():
         warp2()
         dock()
         transferMiningHold()
+    elif(pyautogui.pixelMatchesColor(1484, 180, (104, 70, 29))):
+        print("Mining not done yet, keeping mining for more 320 sec")
+        time.sleep(320)
     else:
         print("Ore Hold Not full...")
         scan()
@@ -65,6 +68,7 @@ def fullOreHold():
         aproch()
         lock()
         ActivateMiners()
+
 
 def generalOverview():
     #general Overview
@@ -121,8 +125,8 @@ def scanedVeldpar5k():
     #neste caso o asteroide com mais veldespar
     for asteroid in listasteroid: 
         if  asteroid[1] > 1: 
-            btLsx= asteroid[0]
-            btLsy= asteroid[1] 
+            btLsx= asteroid[0]+15
+            btLsy= asteroid[1]+10 
     
     pyautogui.moveTo(btLsx, btLsy)
     pyautogui.click()
@@ -166,10 +170,12 @@ def ActivateMiners():
     print("Miner 1 Locked...")
     pyautogui.hotkey('f2') 
     print("Miner 2 Locked...")
-    for each in range(0,720):
+    for each in range(0,360):
         print("Mining for ", each ," sec")
         time.sleep(1)
     fullOreHold()
+
+
 
 
 
@@ -195,9 +201,6 @@ def main():
         aproch()
         scan()      
         scanedVeldpar5k()
-        #falta fazer aquiuma função para qunado 
-        #os laseres estarem ativados para nao desativar sozinho
-        #usar a foto para ver comparar os pixeis baixo do asteroir para saber se ainda esta a minerar ou nao 
         ActivateMiners()
     
 
