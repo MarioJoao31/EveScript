@@ -61,7 +61,6 @@ def fullOreHold():
         scan()
         scanedVeldpar5k()
         aproch()
-        scanedVeldpar5k()
         lock()
         ActivateMiners()
 
@@ -113,17 +112,15 @@ def lockVeldspar():
 
 def scanedVeldpar5k():
     #localiza o centro da imagem UNDOCK
-    listasteroid = pyautogui.locateAllOnScreen('scanedVeldspar.png', confidence=0.7)
+    listasteroid = pyautogui.locateAllOnScreen('scanedVeldspar.png', confidence=0.6)
     #seleciona todos os asteroides e escolhe o ultimo da lista, 
     #neste caso o asteroide com mais veldespar
-    for asteroid in listasteroid:
-        print("x=",asteroid[0])
-        print("y=",asteroid[1])
+    for asteroid in listasteroid: 
         if  asteroid[1] > 1: 
-            btLx= asteroid[0]
-            btLy= asteroid[1] 
+            btLsx= asteroid[0]
+            btLsy= asteroid[1] 
     
-    pyautogui.moveTo(btLx, btLy)
+    pyautogui.moveTo(btLsx, btLsy)
     pyautogui.click()
     print("Locked veldspar...")
     time.sleep(2)
@@ -165,7 +162,7 @@ def ActivateMiners():
     print("Miner 1 Locked...")
     pyautogui.hotkey('f2') 
     print("Miner 2 Locked...")
-    for each in range(0,360):
+    for each in range(0,720):
         print("Mining for ", each ," sec")
         time.sleep(1)
     fullOreHold()
@@ -185,16 +182,20 @@ def main():
 
    
     for i in range(0,5):
-        #print("------Reset nº",i," Mining again------")
-        #undock()
-        #minOverview()
-        #warp()
-        #minBelt()
-        #lockVeldspar()
-        #aproch()
-        #scan()      
+        print("------Reset nº",i," Mining again------")
+        undock()
+        minOverview()
+        warp()
+        
+        minBelt()
+        lockVeldspar()
+        aproch()
+        scan()      
         scanedVeldpar5k()
-        #ActivateMiners()
+        falta fazer aquiuma função para qunado 
+        os laseres estarem ativados para nao desativar sozinho
+        usar a foto para ver comparar os pixeis baixo do asteroir para saber se ainda esta a minerar ou nao 
+        ActivateMiners()
     
 
 

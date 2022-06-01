@@ -14,7 +14,7 @@ def main():
     except KeyboardInterrupt:
         print('\n')
 
-    listasteroid = pyautogui.locateAllOnScreen('scanedVeldspar.png', confidence=0.7)
+    listasteroid = pyautogui.locateAllOnScreen('scanedVeldspar.png', confidence=0.6)
 
     
     for asteroid in listasteroid:
