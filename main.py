@@ -40,10 +40,49 @@ def warp():
     #go to mining belt
     pyautogui.press('s') 
     print("Warping...")
+    time.sleep(10)
+
+#see if the ore hold is full 
+def oreHold():
+    im = pyautogui.screenshot()
+    pyautogui.moveTo(339, 590)
+    im.getpixel((339,590))
+
+def generalOverview():
+    #general Overview
+    buttonMiningOPosX = 1595
+    buttonMiningOPosY = 194
+    pyautogui.moveTo(buttonMiningOPosX, buttonMiningOPosY)
+    pyautogui.click()
+    print("general overview selected...")
     time.sleep(1)
 
+def mininStationOverview():
+    #general Overview
+    buttonMiningOPosX = 1600
+    buttonMiningOPosY = 230
+    pyautogui.moveTo(buttonMiningOPosX, buttonMiningOPosY)
+    pyautogui.click()
+    print("mining station selected...")
+    time.sleep(1)
 
+def dock():
+    #go to mining belt
+    pyautogui.press('d') 
+    print("Warping...")
+    time.sleep(1)
 
+#transfers items from mining ore to item hangar 
+def miningHold():
+
+    pyautogui.moveTo(145, 411)
+    pyautogui.click()
+    print("mining hold selected")
+    pyautogui.moveTo(213, 495)
+    pyautogui.dragTo(547, 390, 2, button='left')
+    pyautogui.moveTo(234, 426)
+    pyautogui.dragTo(142, 452, 2, button='left')
+    print("items transfered..")
 
 
 
@@ -52,16 +91,25 @@ def main():
     #começar
     pyautogui.FAILSAFE = True
 
-    #foca na janela do EVE
+    ########foca na janela do EVE
     pyautogui.moveTo(650, 70)
     pyautogui.click()
+    #######
 
-    ######funçoes 
+    ######funçoes######
+
     #undock()
     #minOverview()
-    warp()
-    minBelt()
-    
+    #warp()
+    #minBelt()
+    #oreHold()
+
+
+    #generalOverview()
+    #mininStationOverview()
+    #warp()
+    #dock()
+    #miningHold()
 
 
     #Codigos para descobrir a posição das coisas 
@@ -81,20 +129,3 @@ if __name__ == "__main__":
     main()
 
 
-
-    #undock §
-    #time.sleep(7) §
-    #minigOverview §
-    #AsteriodBelt §2
-    #Warp §
-    #time.sleep(19) §
-    #aproch 20km §
-    #use scan
-    #find in scan best asteriod with most volume 
-    #click on it 
-    #aproch 
-    #lock 
-    #activate both miners
-    #do pixel matching in the last part of the box, in the mining ore hold
-    #if matched go to station
-    #
