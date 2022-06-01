@@ -14,21 +14,6 @@ def main():
     except KeyboardInterrupt:
         print('\n')
 
-    listasteroid = pyautogui.locateAllOnScreen('scanedVeldspar.png', confidence=0.6)
-
-    
-    for asteroid in listasteroid:
-        print("x=",asteroid[0])
-        print("y=",asteroid[1])
-        if  asteroid[1] > 1: 
-            btLx= asteroid[0]
-            btLy= asteroid[1] 
-                       
-    print("largest number:",btLx,btLy)
-      
-
-    
-
 if __name__ == "__main__":
     main()
 

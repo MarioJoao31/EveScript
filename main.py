@@ -33,17 +33,19 @@ def minBelt():
     pyautogui.moveTo(buttonAsteroidBeltX, buttonAsteroidBeltY)
     pyautogui.click()
     print("Mining belt locked...")
-    time.sleep(35)
+    time.sleep(2)
 
 def warp():
     #go to mining belt
-    pyautogui.press('s') 
+    pyautogui.moveTo(1619, 108)
+    pyautogui.click()
     print("Warping...")
-    time.sleep(2)
+    time.sleep(32)
 
 def warp2():
     #go to mining belt
-    pyautogui.press('s') 
+    pyautogui.moveTo(1619, 108)
+    pyautogui.click()
     print("Warping...")
     time.sleep(35)
 
@@ -75,9 +77,11 @@ def generalOverview():
 
 def mininStationOverview():
     #general Overview
-    buttonMiningOPosX = 1600
-    buttonMiningOPosY = 230
-    pyautogui.moveTo(buttonMiningOPosX, buttonMiningOPosY)
+    button2Pos = pyautogui.locateOnScreen('ammarStation.png', confidence=0.9)
+    button2=pyautogui.center(button2Pos)
+    bt2x, bt2y = button2
+    pyautogui.moveTo(bt2x, bt2y)
+   
     pyautogui.click()
     print("mining station selected...")
     time.sleep(1)
@@ -185,16 +189,15 @@ def main():
         print("------Reset nº",i," Mining again------")
         undock()
         minOverview()
-        warp()
-        
         minBelt()
+        warp()
         lockVeldspar()
         aproch()
         scan()      
         scanedVeldpar5k()
-        falta fazer aquiuma função para qunado 
-        os laseres estarem ativados para nao desativar sozinho
-        usar a foto para ver comparar os pixeis baixo do asteroir para saber se ainda esta a minerar ou nao 
+        #falta fazer aquiuma função para qunado 
+        #os laseres estarem ativados para nao desativar sozinho
+        #usar a foto para ver comparar os pixeis baixo do asteroir para saber se ainda esta a minerar ou nao 
         ActivateMiners()
     
 
