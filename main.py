@@ -63,6 +63,7 @@ def fullOreHold():
         for each in range(0,160):
             print("Mining for ", each ," sec")
         time.sleep(1)
+        fullOreHold()
     else:
         print("Ore Hold Not full...")
         scan()
