@@ -5,7 +5,7 @@ import keyboard
 
 def main():
     im = pyautogui.screenshot()
-    print(im.getpixel((1484, 180)))
+    print(im.getpixel((339, 590)))
     if( pyautogui.pixelMatchesColor(1484, 180, (104, 70, 29),tolerance=15)):
         print("hello")
 

@@ -42,36 +42,35 @@ def warp():
     print("Warping...")
     time.sleep(39)
 
-def warp2():
-    #go to mining belt
-    pyautogui.moveTo(1619, 108)
-    pyautogui.click()
-    print("Warping...")
-    time.sleep(39)
+
 
 #see if the ore hold is full 
 def fullOreHold():
-    if(pyautogui.pixelMatchesColor(339, 590, (3, 71, 91))):
+    if(pyautogui.pixelMatchesColor(339, 590, (3, 71, 91),tolerance=15)):
         print("Ore Hold Full...")
         generalOverview()
         mininStationOverview()
-        warp2()
+        warp()
         dock()
         transferMiningHold()
+
     elif(pyautogui.pixelMatchesColor(1484, 180, (104, 70, 29),tolerance=15)):
         print("Mining not done yet, keeping mining for more 320 sec")
         for each in range(0,160):
             print("Mining for ", each ," sec")
             time.sleep(1)
         fullOreHold()
+
     else:
         print("Ore Hold Not full...")
         scan()
         scanedVeldpar5k()
         aproch()
         lock()
+        lock()
         ActivateMiners()
-
+        
+        
 
    
     
@@ -87,32 +86,33 @@ def generalOverview():
 
 def mininStationOverview():
     #general Overview
-    button2Pos = pyautogui.locateOnScreen('ammarStation.png', confidence=0.9)
+    button2Pos = pyautogui.locateOnScreen('amarrStation.png', confidence=0.8)
     button2=pyautogui.center(button2Pos)
     bt2x, bt2y = button2
     pyautogui.moveTo(bt2x, bt2y)
    
     pyautogui.click()
-    print("mining station selected...")
+    print("Amarr Mining station selected...")
     time.sleep(1)
 
 def dock():
     #go to mining belt
     pyautogui.press('d') 
     print("Warping...")
-    time.sleep(1)
+    time.sleep(15)
 
 #transfers items from mining ore to item hangar 
 def transferMiningHold():
 
     pyautogui.moveTo(145, 411)
     pyautogui.click()
-    print("mining hold selected")
+    print("Inventory == Mining hold selected")
     pyautogui.moveTo(213, 495)
     pyautogui.dragTo(547, 390, 2, button='left')
     pyautogui.moveTo(234, 426)
     pyautogui.dragTo(135, 475, 2, button='left')
-    print("items transfered...")
+    print("Inventory == items transfered...")
+    time.sleep(2)
 
 def lockVeldspar():
     #localiza o centro da imagem UNDOCK
@@ -178,7 +178,7 @@ def ActivateMiners():
     print("Miner 1 Locked...")
     pyautogui.hotkey('f2') 
     print("Miner 2 Locked...")
-    for each in range(0,360):
+    for each in range(0,160):
         print("Mining for ", each ," sec")
         time.sleep(1)
     fullOreHold()
@@ -200,17 +200,18 @@ def main():
 
    
     for i in range(0,5):
-        #print("------Reset nº",i," Mining again------")
-        #undock()
-        #minOverview()
-        #minBelt()
-        #warp()
-        #lockVeldspar()
-        #aproch()
-        #scan()      
-        #scanedVeldpar5k()
-        #ActivateMiners()
+        print("------Reset nº",i," Mining again------")
+        undock()
+        minOverview()
+        minBelt()
+        warp()
+        lockVeldspar()
+        aproch()
+        scan()      
+        scanedVeldpar5k()
+        ActivateMiners()
         fullOreHold()
+        
     
 
 
