@@ -4,10 +4,7 @@ import time
 import keyboard
 
 def main():
-    im = pyautogui.screenshot()
-    print(im.getpixel((339, 590)))
-    if( pyautogui.pixelMatchesColor(1484, 180, (104, 70, 29),tolerance=15)):
-        print("hello")
+   
 
     print('Press Ctrl-C to quit.')
     try:

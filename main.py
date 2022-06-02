@@ -2,6 +2,7 @@
 import pyautogui,sys
 import time
 import keyboard
+import random
 
 
 
@@ -18,21 +19,25 @@ def undock():
         time.sleep(1)
 
 def minOverview():
-    #Mining Overview
-    buttonMiningOPosX = 1640
-    buttonMiningOPosY = 191
-    pyautogui.moveTo(buttonMiningOPosX, buttonMiningOPosY)
-    pyautogui.click()
-    print("Mining opended...")
-    time.sleep(1)
-
-def minBelt():
     #go to mining belt
-    buttonAsteroidBeltX = 1653
-    buttonAsteroidBeltY = 263
+    buttonAsteroidBeltX = 1640
+    buttonAsteroidBeltY = 190
     pyautogui.moveTo(buttonAsteroidBeltX, buttonAsteroidBeltY)
     pyautogui.click()
-    print("Mining belt locked...")
+    print("Mining Overview selected")
+    time.sleep(1)
+
+def minBelt(nrandom):
+    #Mining Overview
+    listaBelts = pyautogui.locateAllOnScreen('Asteroid-belt.png', confidence=0.8)
+    for belt in enumerate(listaBelts):
+        if nrandom == belt[0]:
+            btbeltx=belt[1][0]
+            btbelty=belt[1][1]
+   
+    pyautogui.moveTo(btbeltx,btbelty)
+    pyautogui.click()
+    print("Asteroid belt selected...")
     time.sleep(2)
 
 def warp():
@@ -66,7 +71,6 @@ def fullOreHold():
         scan()
         scanedVeldpar5k()
         aproch()
-        lock()
         lock()
         ActivateMiners()
         
@@ -138,8 +142,7 @@ def scanedVeldpar5k():
     pyautogui.click()
     print("Locked veldspar...")
     time.sleep(2)
-    aproch()
-    lock()
+    
 
 def scan():
     #localiza o centro da imagem UNDOCK
@@ -196,20 +199,24 @@ def main():
     ########foca na janela do EVE
     pyautogui.moveTo(650, 70)
     pyautogui.click()
-    #######
-
-   
-    for i in range(0,5):
+    ####### Numero random para usar no minOverview
+    #assim arranja um asterroid belt diferente todas as vezes
+    nrandom=random.randint(0, 6)
+    print("numero random:",nrandom)
+    
+    for i in range(1,9):
         print("------Reset nº",i," Mining again------")
         undock()
         minOverview()
-        minBelt()
+        minBelt(nrandom)
         warp()
         lockVeldspar()
         aproch()
         scan()      
         scanedVeldpar5k()
-        ActivateMiners()
+        aproch()
+        lock()
+        ActivateMiners() 
         fullOreHold()
         
     
