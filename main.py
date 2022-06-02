@@ -7,7 +7,7 @@ import keyboard
 
 def undock():
     #localiza o centro da imagem UNDOCK
-    buttonUndockPos = pyautogui.locateOnScreen('imgs/undock.png', confidence=0.6)
+    buttonUndockPos = pyautogui.locateOnScreen('undock.png', confidence=0.6)
     buttonUndock=pyautogui.center(buttonUndockPos)
     btUx, btUy = buttonUndock
     pyautogui.moveTo(btUx, btUy)
@@ -58,9 +58,11 @@ def fullOreHold():
         warp2()
         dock()
         transferMiningHold()
-    elif(pyautogui.pixelMatchesColor(1484, 180, (104, 70, 29))):
+    elif(pyautogui.pixelMatchesColor(1484, 180, (104, 70, 29),tolerance=15)):
         print("Mining not done yet, keeping mining for more 320 sec")
-        time.sleep(320)
+        for each in range(0,160):
+            print("Mining for ", each ," sec")
+        time.sleep(1)
     else:
         print("Ore Hold Not full...")
         scan()
@@ -69,6 +71,9 @@ def fullOreHold():
         lock()
         ActivateMiners()
 
+
+   
+    
 
 def generalOverview():
     #general Overview
@@ -81,7 +86,7 @@ def generalOverview():
 
 def mininStationOverview():
     #general Overview
-    button2Pos = pyautogui.locateOnScreen('imgs/ammarStation.png', confidence=0.9)
+    button2Pos = pyautogui.locateOnScreen('ammarStation.png', confidence=0.9)
     button2=pyautogui.center(button2Pos)
     bt2x, bt2y = button2
     pyautogui.moveTo(bt2x, bt2y)
@@ -110,7 +115,7 @@ def transferMiningHold():
 
 def lockVeldspar():
     #localiza o centro da imagem UNDOCK
-    buttonLockVeldPos = pyautogui.locateOnScreen('imgs/concentratedVeld.png', confidence=0.7)
+    buttonLockVeldPos = pyautogui.locateOnScreen('concentratedVeld.png', confidence=0.7)
     buttonLockVeld=pyautogui.center(buttonLockVeldPos)
     btLx, btLy = buttonLockVeld
     pyautogui.moveTo(btLx, btLy)
@@ -120,7 +125,7 @@ def lockVeldspar():
 
 def scanedVeldpar5k():
     #localiza o centro da imagem UNDOCK
-    listasteroid = pyautogui.locateAllOnScreen('imgs/scanedVeldspar.png', confidence=0.6)
+    listasteroid = pyautogui.locateAllOnScreen('scanedVeldspar.png', confidence=0.6)
     #seleciona todos os asteroides e escolhe o ultimo da lista, 
     #neste caso o asteroide com mais veldespar
     for asteroid in listasteroid: 
@@ -137,7 +142,7 @@ def scanedVeldpar5k():
 
 def scan():
     #localiza o centro da imagem UNDOCK
-    buttonScanPos = pyautogui.locateOnScreen('imgs/scan.png', confidence=0.8)
+    buttonScanPos = pyautogui.locateOnScreen('scan.png', confidence=0.8)
     buttonScan=pyautogui.center(buttonScanPos)
     btSx, btSy = buttonScan
     pyautogui.moveTo(btSx, btSy)
