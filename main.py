@@ -62,7 +62,7 @@ def fullOreHold():
         print("Mining not done yet, keeping mining for more 320 sec")
         for each in range(0,160):
             print("Mining for ", each ," sec")
-        time.sleep(1)
+            time.sleep(1)
         fullOreHold()
     else:
         print("Ore Hold Not full...")
@@ -159,7 +159,9 @@ def aproch():
     pyautogui.moveTo(btAx, btAy)
     pyautogui.click()
     print("Aproching...")
-    time.sleep(30)
+    for each in range(0,35):
+            print("Aproching in", each ," sec")
+            time.sleep(1)
 
 def lock():
     #go to mining belt
@@ -198,16 +200,17 @@ def main():
 
    
     for i in range(0,5):
-        print("------Reset nº",i," Mining again------")
-        undock()
-        minOverview()
-        minBelt()
-        warp()
-        lockVeldspar()
-        aproch()
-        scan()      
-        scanedVeldpar5k()
-        ActivateMiners()
+        #print("------Reset nº",i," Mining again------")
+        #undock()
+        #minOverview()
+        #minBelt()
+        #warp()
+        #lockVeldspar()
+        #aproch()
+        #scan()      
+        #scanedVeldpar5k()
+        #ActivateMiners()
+        fullOreHold()
     
 
 
