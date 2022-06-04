@@ -56,6 +56,7 @@ def fullOreHold():
         generalOverview()
         mininStationOverview()
         warp()
+        mininStationOverview()
         dock()
         transferMiningHold()
 
@@ -102,7 +103,7 @@ def mininStationOverview():
 def dock():
     #go to mining belt
     pyautogui.press('d') 
-    print("Warping...")
+    print("Docking...")
     time.sleep(15)
 
 #transfers items from mining ore to item hangar 
@@ -201,7 +202,7 @@ def main():
     pyautogui.click()
     ####### Numero random para usar no minOverview
     #assim arranja um asterroid belt diferente todas as vezes
-    nrandom=random.randint(0, 6)
+    nrandom=random.randint(1, 6)
     print("numero random:",nrandom)
     
     for i in range(1,9):
@@ -210,6 +211,7 @@ def main():
         minOverview()
         minBelt(nrandom)
         warp()
+        #criar aqui função para verificare se exite ou nao concentrated veldespar
         lockVeldspar()
         aproch()
         scan()      
