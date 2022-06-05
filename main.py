@@ -51,7 +51,7 @@ def warp():
 
 #see if the ore hold is full 
 def fullOreHold():
-    if(pyautogui.pixelMatchesColor(390, 620, (3, 71, 91),tolerance=15)):
+    if(pyautogui.pixelMatchesColor(470, 522, (3, 71, 91),tolerance=15)):
         print("Ore Hold Full...")
         generalOverview()
         mininStationOverview()

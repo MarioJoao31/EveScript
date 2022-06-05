@@ -4,18 +4,8 @@ import time
 import keyboard
 
 def main():
-    buttonLockVeldPos = pyautogui.locateOnScreen('concentratedVeld.png', confidence=0.7) 
-    if buttonLockVeldPos == None: 
-        print("Doesnt exist veldespar in this belt")
-    else: 
-        buttonLockVeld=pyautogui.center(buttonLockVeldPos)
-        btLx, btLy = buttonLockVeld
-        pyautogui.moveTo(btLx, btLy)
-        pyautogui.click()
-        print("Locked veldspar...")
-        time.sleep(1)
     
-
+ 
     print('Press Ctrl-C to quit.')
     try:
         while True:
