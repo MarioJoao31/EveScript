@@ -51,15 +51,13 @@ def warp():
 
 #see if the ore hold is full 
 def fullOreHold():
-    if(pyautogui.pixelMatchesColor(392, 657, (3, 71, 91),tolerance=15)):
+
+    if(pyautogui.locateOnScreen('FullOreHold.png', confidence=0.7)): # use full foto 
         print("Ore Hold Full...")
-        generalOverview()
-        mininStationOverview()
-        warp()
-        dock()
+        stationDock()
         transferMiningHold()
-        return
-    elif(pyautogui.pixelMatchesColor(1484, 180, (104, 70, 29),tolerance=15)):
+        
+    elif(pyautogui.locateOnScreen('Mining.png', confidence=0.7)): #mining foto 
         print("Mining not done yet, keeping mining for more 160 sec")
         for each in range(0,32):
             print("Mining for ", each*5 ," sec")
@@ -88,15 +86,17 @@ def generalOverview():
     print("general overview selected...")
     time.sleep(1)
 
-def mininStationOverview():
+def stationDock():
     #general Overview
-    button2Pos = pyautogui.locateOnScreen('amarrStation.png', confidence=0.8)
+    button2Pos = pyautogui.locateOnScreen('AmarrMiningStation.png', confidence=0.8)
     button2=pyautogui.center(button2Pos)
     bt2x, bt2y = button2
     pyautogui.moveTo(bt2x, bt2y)
-   
+    pyautogui.click(button='right')
+    pyautogui.moveTo(bt2x+20, bt2y+15)
     pyautogui.click()
     print("Amarr Mining station selected...")
+    
     time.sleep(1)
 
 def dock():
@@ -125,10 +125,9 @@ def lockVeldspar():
         print("Doesnt exist veldespar in this belt")
         print("Going back to dock")
         generalOverview()
-        mininStationOverview()
-        warp()
-        dock()
+        stationDock()
         transferMiningHold()
+        main()
     else: 
         buttonLockVeld=pyautogui.center(buttonLockVeldPos)
         btLx, btLy = buttonLockVeld
@@ -141,17 +140,16 @@ def lockVeldspar():
         
 
 def scanedVeldpar5k():
-    #localiza o centro da imagem UNDOCK
-    listasteroid = pyautogui.locateAllOnScreen('scanedVeldspar.png', confidence=0.6)
-    #seleciona todos os asteroides e escolhe o ultimo da lista, 
-    #neste caso o asteroide com mais veldespar
-    if listasteroid == None:
-        generalOverview()
-        mininStationOverview()
-        warp()
-        dock()
+    #ve se existe astroids
+    existe = pyautogui.locateOnScreen('scanedVeldspar.png', confidence=0.4)
+    if existe == None:   
+        stationDock()
         transferMiningHold()
     else:
+        listasteroid = pyautogui.locateAllOnScreen('scanedVeldspar.png', confidence=0.4)
+        #seleciona todos os asteroides e escolhe o ultimo da lista, 
+        #neste caso o asteroide com mais veldespar
+
         for asteroid in listasteroid: 
             if  asteroid[1] > 1: 
                 btLsx= asteroid[0]+15
@@ -161,31 +159,20 @@ def scanedVeldpar5k():
         pyautogui.click()
         print("Locked veldspar...")
         time.sleep(2)
+    
          
     
     
 
 def scan():
-    #localiza o centro da imagem UNDOCK
-    buttonScanPos = pyautogui.locateOnScreen('scan.png', confidence=0.7)
-    if buttonScanPos == None:
-        generalOverview()
-        mininStationOverview()
-        warp()
-        dock()
-        transferMiningHold()
-    else:
-        buttonScan=pyautogui.center(buttonScanPos)
-        btSx, btSy = buttonScan
-        pyautogui.moveTo(btSx, btSy)
-        pyautogui.click()
-        print("Scanning asteroid belt 7sec")
-        time.sleep(8)
+    pyautogui.moveTo(1123, 948)
+    pyautogui.click()
+    print("Scanning asteroid belt 8")
 
 def aproch():
     #go to mining belt
     btAx=1585
-    btAy=109
+    btAy=120
     
     pyautogui.moveTo(btAx, btAy)
     pyautogui.click()
@@ -219,8 +206,6 @@ def ActivateMiners():
 
 
 def main():
-
-
     #começar
     pyautogui.FAILSAFE = True
 
@@ -238,7 +223,6 @@ def main():
         minOverview()
         minBelt(nrandom)
         warp()
-        #criar aqui função para verificare se exite ou nao concentrated veldespar
         lockVeldspar()
         aproch()
         scan()      
