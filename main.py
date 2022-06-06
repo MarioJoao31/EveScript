@@ -52,7 +52,7 @@ def warp():
 #see if the ore hold is full 
 def fullOreHold():
 
-    if(pyautogui.locateOnScreen('FullOreHold.png', confidence=0.95)): # use full foto 
+    if(pyautogui.locateOnScreen('FullOreHold.png', confidence=0.9)): # use full foto 
         print("Ore Hold Full...")
         stationDock()
         transferMiningHold()
@@ -72,10 +72,6 @@ def fullOreHold():
         lock()
         ActivateMiners()
         
-        
-
-   
-    
 
 def generalOverview():
     #general Overview
@@ -95,15 +91,15 @@ def stationDock():
     pyautogui.click(button='right')
     pyautogui.moveTo(bt2x+20, bt2y+15)
     pyautogui.click()
-    print("Amarr Mining station selected...")
+    print("Amarr Mining station selected 35...")
     
-    time.sleep(1)
+    time.sleep(35)
 
 def dock():
     #go to mining belt
     pyautogui.moveTo(1645, 120)
     pyautogui.click()
-    print("Docking...")
+    print("Docking 15...")
     time.sleep(15)
 
 #transfers items from mining ore to item hangar 
@@ -116,7 +112,7 @@ def transferMiningHold():
     pyautogui.dragTo(560, 547, 1, button='left')
     pyautogui.moveTo(234, 575)
     pyautogui.dragTo(144, 633, 1, button='left')
-    print("Inventory == items transfered...")
+    print("Inventory == items transfered 2...")
     time.sleep(2)
 
 def lockVeldspar():
