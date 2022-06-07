@@ -138,7 +138,8 @@ def lockVeldspar():
 def scanedVeldpar5k():
     #ve se existe astroids
     existe = pyautogui.locateOnScreen('scanedVeldspar.png', confidence=0.4)
-    if existe == None:   
+    if existe == None: 
+        print("Doesnt exist veldspar!")  
         stationDock()
         transferMiningHold()
     else:
