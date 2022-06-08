@@ -204,10 +204,7 @@ def ActivateMiners():
 
 
 def main():
-<<<<<<< HEAD
     
-=======
->>>>>>> 770f89a6f9c874148094e29388c9ab89ea9c48c6
     #começar
     pyautogui.FAILSAFE = True
     #########foca na janela do EVE
