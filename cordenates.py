@@ -1,18 +1,7 @@
-import ast
-import pyautogui,sys
-import time
-import keyboard
 
-def main():
-    pyautogui.moveTo(145, 560)
-    pyautogui.click()
-    print("Inventory == Mining hold selected")
-    pyautogui.moveTo(210, 639)
-    pyautogui.dragTo(560, 547, 1, button='left')
-    pyautogui.moveTo(234, 575)
-    pyautogui.dragTo(144, 633, 1, button='left')
-    print("Inventory == items transfered...")
-    time.sleep(2)
+import pyautogui,sys
+
+def coordenadas():
     print('Press Ctrl-C to quit.')
     try:
         while True:
@@ -23,8 +12,15 @@ def main():
     except KeyboardInterrupt:
         print('\n')
 
+
+
+
+def main():
+
+
+    #coordenadas()
+    if(pyautogui.locateOnScreen('FullOreHold.png', confidence=0.9)): # use full foto 
+        print("Ore Hold Full...")
+
 if __name__ == "__main__":
     main()
-
-
-# while keyboard.is_pressed('esc') == False:
