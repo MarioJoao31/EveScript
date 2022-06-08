@@ -1,9 +1,9 @@
 
 import pyautogui,sys
 import time
-import keyboard
+import discord
 import random
-
+import os
 
 
 def undock():
@@ -216,19 +216,18 @@ def ActivateMiners():
 
 
 
+    
 
 
 def main():
-
-
+    
     #começar
     pyautogui.FAILSAFE = True
-
-    ########foca na janela do EVE
+    #########foca na janela do EVE
     pyautogui.moveTo(650, 70)
     pyautogui.click()
-    ####### Numero random para usar no minOverview
-    #assim arranja um asterroid belt diferente todas as vezes
+    ######## Numero random para usar no minOverview
+    ##assim arranja um asterroid belt diferente todas as vezes
     nrandom=random.randint(1, 6)
     print("numero random:",nrandom)
     
