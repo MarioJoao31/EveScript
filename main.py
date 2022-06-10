@@ -6,14 +6,15 @@ import random
 import os
 
 
-def undock():
+async def undock():
     #localiza o centro da imagem UNDOCK
     buttonUndockPos = pyautogui.locateOnScreen('undock.png', confidence=0.6)
     buttonUndock=pyautogui.center(buttonUndockPos)
     btUx, btUy = buttonUndock
     pyautogui.moveTo(btUx, btUy)
     pyautogui.click()
-    print("Undocking...")
+    print("Undocking...")   
+    await message.channel.send(f'Undocking...')
     for each in range(0,12):
         print(each)
         time.sleep(1)
@@ -50,12 +51,14 @@ def warp():
 
 
 #see if the ore hold is full 
-def fullOreHold():
+async def fullOreHold():
 
     if(pyautogui.locateOnScreen('FullOreHold.png', confidence=0.9)): # use full foto 
         print("Ore Hold Full...")
         stationDock()
         transferMiningHold()
+        await message.channel.send(f'Ore Hold full')
+
         
     elif(pyautogui.locateOnScreen('Mining.png', confidence=0.7)): #mining foto 
         print("Mining not done yet, keeping mining for more 160 sec")
