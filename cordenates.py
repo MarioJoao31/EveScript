@@ -18,9 +18,8 @@ def coordenadas():
 def main():
 
 
-    #coordenadas()
-    if(pyautogui.locateOnScreen('FullOreHold.png', confidence=0.9)): # use full foto 
-        print("Ore Hold Full...")
+    coordenadas()
+    
 
 if __name__ == "__main__":
     main()

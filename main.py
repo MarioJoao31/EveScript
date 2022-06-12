@@ -7,7 +7,7 @@ import random
 import os
 
 
-async def undock():
+def undock():
     #localiza o centro da imagem UNDOCK
     buttonUndockPos = pyautogui.locateOnScreen('undock.png', confidence=0.6)
     buttonUndock=pyautogui.center(buttonUndockPos)
@@ -15,7 +15,7 @@ async def undock():
     pyautogui.moveTo(btUx, btUy)
     pyautogui.click()
     print("Undocking...")   
-    await message.channel.send(f'Undocking...')
+   
     for each in range(0,12):
         print(each)
         time.sleep(1)
@@ -52,14 +52,13 @@ def warp():
 
 
 #see if the ore hold is full 
-async def fullOreHold():
+def fullOreHold():
 
     if(pyautogui.locateOnScreen('FullOreHold.png', confidence=0.9)): # use full foto 
         print("Ore Hold Full...")
         stationDock()
         transferMiningHold()
-        await message.channel.send(f'Ore Hold full')
-
+       
         
     elif(pyautogui.locateOnScreen('Mining.png', confidence=0.7)): #mining foto 
         print("Mining not done yet, keeping mining for more 160 sec")
@@ -169,6 +168,7 @@ def scan():
     pyautogui.moveTo(1123, 948)
     pyautogui.click()
     print("Scanning asteroid belt 8")
+    time.sleep(9)
 
 def aproch():
     #go to mining belt
@@ -193,9 +193,15 @@ def lock():
 
 def ActivateMiners():
     #go to mining belt
-    pyautogui.hotkey('f1') 
+    btMiner1x=1055
+    btMiner1y=910
+    pyautogui.moveTo(btMiner1x, btMiner1y)
+    pyautogui.click()
     print("Miner 1 Locked...")
-    pyautogui.hotkey('f2') 
+    btMiner2x=1100
+    btMiner2y=910
+    pyautogui.moveTo(btMiner2x, btMiner2y)
+    pyautogui.click()
     print("Miner 2 Locked...")
     for each in range(0,32):
         print("Mining for ", each*5 ," sec")
@@ -208,21 +214,6 @@ def ActivateMiners():
 
 
 def main():
-    class MyClient(discord.Client):
-        async def on_ready(self):
-            print('Logged on as {0}!'.format(self.user))
-
-        async def on_message(self, message):
-            print('Message from {0.author}: {0.content}'.format(message))
-            if message.content == '!funcoes':
-                await message.channel.send(f'{message.author.name} as funções deste bot são as seguintes:{os.linesep}1-undock{os.linesep}2-minOverview{os.linesep}3-minBelt{os.linesep}4-warp{os.linesep}5-lockVeldspar{os.linesep}6-aproch{os.linesep}7-scan{os.linesep}8-scanedVeldpar5k{os.linesep}9-lock{os.linesep}10-ActivateMiners{os.linesep}11-fullOreHold')
-
-    load_dotenv()
-    client = MyClient()
-    #correr o bot no discord e vai buscar a pass ao .env
-    client.run(os.getenv("TOKEN"))
-
-
 
 
     #começar
