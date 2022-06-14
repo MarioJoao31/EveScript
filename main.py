@@ -136,6 +136,7 @@ def scanedVeldpar5k():
         print("Doesnt exist veldspar!")  
         stationDock()
         transferMiningHold()
+        main()
     else:
         listasteroid = pyautogui.locateAllOnScreen('scanedVeldspar.png', confidence=0.4)
         #seleciona todos os asteroides e escolhe o ultimo da lista, 
