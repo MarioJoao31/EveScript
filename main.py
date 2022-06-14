@@ -54,10 +54,11 @@ def warp():
 #see if the ore hold is full 
 def fullOreHold():
 
-    if(pyautogui.locateOnScreen('FullOreHold.png', confidence=0.9)): # use full foto 
+    if(pyautogui.locateOnScreen('FullOreHold.png', confidence=0.95)): # use full foto 
         print("Ore Hold Full...")
         stationDock()
         transferMiningHold()
+        main()
        
         
     elif(pyautogui.locateOnScreen('Mining.png', confidence=0.7)): #mining foto 
@@ -96,7 +97,7 @@ def stationDock():
     pyautogui.click()
     print("Amarr Mining station selected 35...")
     
-    time.sleep(35)
+    time.sleep(50)
 
 def dock():
     #go to mining belt
