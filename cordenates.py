@@ -1,7 +1,14 @@
 
 import pyautogui,sys
 
-def coordenadas():
+def coordenadas(n):
+    if n==1:
+        print("n = 1")
+        
+    else :
+        print("n != 1 ")
+        main()
+
     print('Press Ctrl-C to quit.')
     try:
         while True:
@@ -16,9 +23,9 @@ def coordenadas():
 
 
 def main():
-
-
-    coordenadas()
+    n=2
+    print("ola main")
+    coordenadas(n)
     
 
 if __name__ == "__main__":
