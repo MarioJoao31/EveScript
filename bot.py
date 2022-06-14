@@ -1,18 +1,45 @@
 import discord
 import os
 from dotenv import load_dotenv
+from discord.ext import commands
 
-class MyClient(discord.Client):
-    async def on_ready(self):
-        print('Logged on as {0}!'.format(self.user))
+bot = commands.Bot("!")
 
-    async def on_message(self, message):
-        print('Message from {0.author}: {0.content}'.format(message))
-        if message.content == '!funcoes':
-            await message.channel.send(f'{message.author.name} as funções deste bot são as seguintes:{os.linesep}1-undock{os.linesep}2-minOverview{os.linesep}3-minBelt{os.linesep}4-warp{os.linesep}5-lockVeldspar{os.linesep}6-aproch{os.linesep}7-scan{os.linesep}8-scanedVeldpar5k{os.linesep}9-lock{os.linesep}10-ActivateMiners{os.linesep}11-fullOreHold')
+@bot.event
+async def on_ready():
+    print("I´m on Mário! Macaco Miner activated ")
 
-#vai carregar a variavel do ficheiro .env
+@bot.event # se tiver a palavra gay elimina a mensagem e envia o aviso 
+async def on_message(message):
+    # verification to not read the bot messages 
+    if message.author == bot.user:
+        return
+    if "gay" in message.content:
+        await message.channel.send(
+            f"Alguem falou de gays? {message.author.name} COME O MEU PAU"
+        )
+        await message.delete()
+
+@bot.command(name="funcoes")
+async def funcoes(ctx):
+    name = ctx.author.name
+
+    response= "Olá " + name
+
+    await ctx.send(response)
+
+@bot.command(name="ola")
+async def ola(ctx):
+    name = ctx.author.name
+
+    response= "Olá "+ name + " seu filho de 30 putas!" 
+
+    await ctx.send(response)
+
+@bot.command(name="runbot")
+async def runbot(ctx):
+    runbot()
+
+
 load_dotenv()
-client = MyClient()
-#correr o bot no discord e vai buscar a pass ao .env
-client.run(os.getenv("TOKEN"))
+bot.run(os.getenv("TOKEN"))
