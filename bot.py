@@ -19,14 +19,15 @@ async def on_message(message):
             f"Alguem falou de gays? {message.author.name} COME O MEU PAU"
         )
         await message.delete()
+    await bot.process_commands(message)
 
 @bot.command(name="funcoes")
 async def funcoes(ctx):
     name = ctx.author.name
 
-    response= "Olá " + name
+    response= "Alex é gay"
 
-    await ctx.send(response)
+    await ctx.channel.send(response)
 
 @bot.command(name="ola")
 async def ola(ctx):
@@ -34,7 +35,7 @@ async def ola(ctx):
 
     response= "Olá "+ name + " seu filho de 30 putas!" 
 
-    await ctx.send(response)
+    await ctx.channel.send(response)
 
 @bot.command(name="runbot")
 async def runbot(ctx):
