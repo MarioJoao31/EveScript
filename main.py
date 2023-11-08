@@ -1,33 +1,36 @@
-
+import pygetwindow as gw
 import pyautogui,sys
 import time
-import discord
-from dotenv import load_dotenv
 import random
 import os
 
 
 def undock():
     #localiza o centro da imagem UNDOCK
-    buttonUndockPos = pyautogui.locateOnScreen('undock.png', confidence=0.6)
+    buttonUndockPos = pyautogui.locateOnScreen('images/undock.png', confidence=0.3)
     buttonUndock=pyautogui.center(buttonUndockPos)
     btUx, btUy = buttonUndock
     pyautogui.moveTo(btUx, btUy)
     pyautogui.click()
     print("Undocking...")   
-   
-    for each in range(0,12):
-        print(each)
+    
+    #enquanto n sair 
+    while True:
         time.sleep(1)
 
-def minOverview():
+        if pyautogui.locateOnScreen('images/icon.png', confidence=0.3):
+            print("Out of station")
+            break
+
+
+def miningOverview():
     #go to mining belt
-    buttonAsteroidBeltX = 1640
-    buttonAsteroidBeltY = 190
-    pyautogui.moveTo(buttonAsteroidBeltX, buttonAsteroidBeltY)
+    button = pyautogui.locateOnScreen('images/MiningOverview.png', confidence=0.8)
+    print("MiningOverview...")
+    buttonPos=pyautogui.center(button)
+    btUx, btUy = buttonPos
+    pyautogui.moveTo(btUx, btUy)
     pyautogui.click()
-    print("Mining Overview selected")
-    time.sleep(1)
 
 def minBelt(nrandom):
     #Mining Overview
@@ -201,8 +204,18 @@ def ActivateMiners():
     fullOreHold()
 
 
-
-    
+def openWindows():
+    # Locate an image on the screen
+    icon = pyautogui.locateOnScreen('images/eveicon.png', confidence=0.7)
+  
+    if icon: 
+        button2=pyautogui.center(icon)
+        bt2x, bt2y = button2
+        pyautogui.moveTo(bt2x, bt2y)
+        pyautogui.click(button='left')
+        time.sleep(1)
+    else:
+        print("merda do eve n esta online")
 
 
 def runBot():
@@ -210,48 +223,27 @@ def runBot():
 
     #começar
     pyautogui.FAILSAFE = True
-    #########foca na janela do EVE
-    pyautogui.moveTo(650, 70)
-    pyautogui.click()
-    ######## Numero random para usar no minOverview
-    ##assim arranja um asterroid belt diferente todas as vezes
-    nrandom=random.randint(1, 6)
-    print("numero random:",nrandom)
-    
-    for i in range(1,20):
-        print("------Reset nº",i," Mining again------")
-        undock()
-        minOverview()
-        minBelt(nrandom)
-        warp()
-        lockVeldspar()
-        aproch()
-        scan()      
-        scanedVeldpar5k()
-        aproch()
-        lock()
-        ActivateMiners() 
-        fullOreHold()
+    #foca na janela do EVE
+    openWindows()
+    #undock()
+    miningOverview()
+    #minBelt(2)
+    #warp()
+    #lockVeldspar()
+    #aproch()
+    #scan()      
+    #scanedVeldpar5k()
+    #aproch()
+    #lock()
+    #ActivateMiners() 
+    #fullOreHold()
         
 
 
 def main():
-    class MyClient(discord.Client):
-        async def on_ready(self):
-            print('Logged on as {0}!'.format(self.user))
+   runBot()
 
-        async def on_message(self, message):
-            print('Message from {0.author}: {0.content}'.format(message))
-            if message.content == '!funcoes':
-                await message.channel.send(f'{message.author.name} as funções deste bot são as seguintes:{os.linesep}1-undock{os.linesep}2-minOverview{os.linesep}3-minBelt{os.linesep}4-warp{os.linesep}5-lockVeldspar{os.linesep}6-aproch{os.linesep}7-scan{os.linesep}8-scanedVeldpar5k{os.linesep}9-lock{os.linesep}10-ActivateMiners{os.linesep}11-fullOreHold')
-            if message.content == '!runbot':
-                await runBot()
-
-    #vai carregar a variavel do ficheiro .env
-    load_dotenv()
-    client = MyClient()
-    #correr o bot no discord e vai buscar a pass ao .env
-    client.run(os.getenv("TOKEN")) 
+  
 
 
 if __name__ == "__main__":
