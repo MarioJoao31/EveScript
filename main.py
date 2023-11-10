@@ -5,27 +5,50 @@ import random
 import os
 
 
+def runBot():
+
+
+    #começar
+    pyautogui.FAILSAFE = True
+    #foca na janela do EVE
+    openWindows()
+    undock()
+    miningOverview()
+    #minBelt(2)
+    #warp()
+    #lockVeldspar()
+    #aproch()
+    #scan()      
+    #scanedVeldpar5k()
+    #aproch()
+    #lock()
+    #ActivateMiners() 
+    #fullOreHold()
+
+
 def undock():
-    #localiza o centro da imagem UNDOCK
-    buttonUndockPos = pyautogui.locateOnScreen('images/undock.png', confidence=0.3)
-    buttonUndock=pyautogui.center(buttonUndockPos)
-    btUx, btUy = buttonUndock
-    pyautogui.moveTo(btUx, btUy)
+    # Locate the center of the image UNDOCK
+    button_undock_pos = pyautogui.locateOnScreen('images/undock.png', confidence=0.5)
+
+    if button_undock_pos is None:
+        print("Undock button not found.")
+        return
+
+    button_undock = pyautogui.center(button_undock_pos)
+    bt_ux, bt_uy = button_undock
+    pyautogui.moveTo(bt_ux, bt_uy)
     pyautogui.click()
     print("Undocking...")   
+    #TODO: da undock mas depois n sabe se já saiu
+    time.sleep(7)
     
-    #enquanto n sair 
-    while True:
-        time.sleep(1)
-
-        if pyautogui.locateOnScreen('images/icon.png', confidence=0.3):
-            print("Out of station")
-            break
+    
 
 
 def miningOverview():
     #go to mining belt
-    button = pyautogui.locateOnScreen('images/MiningOverview.png', confidence=0.8)
+
+    button = pyautogui.locateOnScreen('images/MiningOverview.png', confidence=0.9)
     print("MiningOverview...")
     buttonPos=pyautogui.center(button)
     btUx, btUy = buttonPos
@@ -218,33 +241,10 @@ def openWindows():
         print("merda do eve n esta online")
 
 
-def runBot():
-
-
-    #começar
-    pyautogui.FAILSAFE = True
-    #foca na janela do EVE
-    openWindows()
-    #undock()
-    miningOverview()
-    #minBelt(2)
-    #warp()
-    #lockVeldspar()
-    #aproch()
-    #scan()      
-    #scanedVeldpar5k()
-    #aproch()
-    #lock()
-    #ActivateMiners() 
-    #fullOreHold()
-        
 
 
 def main():
    runBot()
-
-  
-
 
 if __name__ == "__main__":
     main()
