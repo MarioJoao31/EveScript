@@ -12,10 +12,10 @@ def runBot():
     pyautogui.FAILSAFE = True
     #foca na janela do EVE
     openWindows()
-    undock()
-    miningOverview()
-    #minBelt(2)
-    #warp()
+    #undock()
+    #miningOverview()
+    minBelt()
+    warp()
     #lockVeldspar()
     #aproch()
     #scan()      
@@ -40,42 +40,123 @@ def undock():
     pyautogui.click()
     print("Undocking...")   
     #TODO: da undock mas depois n sabe se já saiu
-    time.sleep(7)
+    time.sleep(13)
     
     
 
 
 def miningOverview():
     #go to mining belt
-
     button = pyautogui.locateOnScreen('images/MiningOverview.png', confidence=0.9)
-    print("MiningOverview...")
+    print("Opening MiningOverview!")
     buttonPos=pyautogui.center(button)
     btUx, btUy = buttonPos
     pyautogui.moveTo(btUx, btUy)
     pyautogui.click()
 
-def minBelt(nrandom):
-    #Mining Overview
-    listaBelts = pyautogui.locateAllOnScreen('Asteroid-belt.png', confidence=0.8)
-    for belt in enumerate(listaBelts):
-        if nrandom == belt[0]:
-            btbeltx=belt[1][0]
-            btbelty=belt[1][1]
-   
-    pyautogui.moveTo(btbeltx,btbelty)
+def minBelt():
+    # Mining Overview
+    listaBelts = pyautogui.locateAllOnScreen('images/AsteroidBelt.png', confidence=0.9)
+
+    # Get the total number of belts
+    total_belts = len(list(listaBelts))
+
+    print("Total belts:", total_belts)
+    
+    if total_belts == 0:
+        print("No asteroid belts found.")
+        return
+
+    random_number = random.randint(0, total_belts)
+    print("Selected belt number:", random_number)
+
+    #TODO: n consigo aceder ao btbelt tem a ver com a variavel
+    for i, belt in list(listaBelts):
+        if i == random_number:
+            btbeltx, btbelty = belt[0][0], belt[1][1]
+            print("Selected belt coordinates:", btbeltx, btbelty)
+
+    pyautogui.moveTo(btbeltx, btbelty - 15)
     pyautogui.click()
     print("Asteroid belt selected...")
     time.sleep(2)
 
 def warp():
     #go to mining belt
-    pyautogui.moveTo(1619, 108)
+    button = pyautogui.locateOnScreen('images/warpButton.png', confidence=0.9)
+    buttonPos=pyautogui.center(button)
+    print("Opening MiningOverview!")
+    btUx, btUy = buttonPos
+    pyautogui.moveTo(btUx, btUy)
     pyautogui.click()
-    print("Warping...")
-    time.sleep(39)
+    time.sleep(30)
 
+def scanedVeldpar5k():
+    #ve se existe astroids
+    existe = pyautogui.locateOnScreen('scanedVeldspar.png', confidence=0.4)
+    if existe == None: 
+        print("Doesnt exist veldspar!")  
+        stationDock()
+        transferMiningHold()
+        main()
+    else:
+        listasteroid = pyautogui.locateAllOnScreen('scanedVeldspar.png', confidence=0.4)
+        #seleciona todos os asteroides e escolhe o ultimo da lista, 
+        #neste caso o asteroide com mais veldespar
 
+        for asteroid in listasteroid: 
+            if  asteroid[1] > 1: 
+                btLsx= asteroid[0]+15
+                btLsy= asteroid[1]+10 
+        
+        pyautogui.moveTo(btLsx, btLsy)
+        pyautogui.click()
+        print("Locked veldspar...")
+        time.sleep(2)  
+
+def scan():
+    pyautogui.moveTo(1123, 948)
+    pyautogui.click()
+    print("Scanning asteroid belt 8")
+    time.sleep(9)
+
+def aproch():
+    #go to mining belt
+    btAx=1585
+    btAy=120
+    
+    pyautogui.moveTo(btAx, btAy)
+    pyautogui.click()
+    print("Aproching...")
+    for each in range(0,35):
+            print("Aproching in", each ," sec")
+            time.sleep(1)
+
+def lock():
+    #go to mining belt
+    btLcx=1707
+    btLcy=112
+    pyautogui.moveTo(btLcx, btLcy)
+    pyautogui.click()
+    print("Target Locked...")
+    time.sleep(2)
+
+def ActivateMiners():
+    #go to mining belt
+    btMiner1x=1055
+    btMiner1y=910
+    pyautogui.moveTo(btMiner1x, btMiner1y)
+    pyautogui.click()
+    print("Miner 1 Locked...")
+    btMiner2x=1100
+    btMiner2y=910
+    pyautogui.moveTo(btMiner2x, btMiner2y)
+    pyautogui.click()
+    print("Miner 2 Locked...")
+    for each in range(0,32):
+        print("Mining for ", each*5 ," sec")
+        time.sleep(5)
+    fullOreHold()
 
 #see if the ore hold is full 
 def fullOreHold():
@@ -100,8 +181,7 @@ def fullOreHold():
         scanedVeldpar5k()
         aproch()
         lock()
-        ActivateMiners()
-        
+        ActivateMiners()      
 
 def stationDock():
     #general Overview
@@ -152,79 +232,6 @@ def lockVeldspar():
         print("Locked veldspar...")
         time.sleep(1)
     
-        
-        
-
-def scanedVeldpar5k():
-    #ve se existe astroids
-    existe = pyautogui.locateOnScreen('scanedVeldspar.png', confidence=0.4)
-    if existe == None: 
-        print("Doesnt exist veldspar!")  
-        stationDock()
-        transferMiningHold()
-        main()
-    else:
-        listasteroid = pyautogui.locateAllOnScreen('scanedVeldspar.png', confidence=0.4)
-        #seleciona todos os asteroides e escolhe o ultimo da lista, 
-        #neste caso o asteroide com mais veldespar
-
-        for asteroid in listasteroid: 
-            if  asteroid[1] > 1: 
-                btLsx= asteroid[0]+15
-                btLsy= asteroid[1]+10 
-        
-        pyautogui.moveTo(btLsx, btLsy)
-        pyautogui.click()
-        print("Locked veldspar...")
-        time.sleep(2)
-    
-         
-    
-    
-
-def scan():
-    pyautogui.moveTo(1123, 948)
-    pyautogui.click()
-    print("Scanning asteroid belt 8")
-    time.sleep(9)
-
-def aproch():
-    #go to mining belt
-    btAx=1585
-    btAy=120
-    
-    pyautogui.moveTo(btAx, btAy)
-    pyautogui.click()
-    print("Aproching...")
-    for each in range(0,35):
-            print("Aproching in", each ," sec")
-            time.sleep(1)
-
-def lock():
-    #go to mining belt
-    btLcx=1707
-    btLcy=112
-    pyautogui.moveTo(btLcx, btLcy)
-    pyautogui.click()
-    print("Target Locked...")
-    time.sleep(2)
-
-def ActivateMiners():
-    #go to mining belt
-    btMiner1x=1055
-    btMiner1y=910
-    pyautogui.moveTo(btMiner1x, btMiner1y)
-    pyautogui.click()
-    print("Miner 1 Locked...")
-    btMiner2x=1100
-    btMiner2y=910
-    pyautogui.moveTo(btMiner2x, btMiner2y)
-    pyautogui.click()
-    print("Miner 2 Locked...")
-    for each in range(0,32):
-        print("Mining for ", each*5 ," sec")
-        time.sleep(5)
-    fullOreHold()
 
 
 def openWindows():
@@ -239,8 +246,6 @@ def openWindows():
         time.sleep(1)
     else:
         print("merda do eve n esta online")
-
-
 
 
 def main():
