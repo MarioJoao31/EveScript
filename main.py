@@ -6,20 +6,18 @@ import os
 
 
 def runBot():
-
-
     #começar
     pyautogui.FAILSAFE = True
     #foca na janela do EVE
     openWindows()
     #undock()
     #miningOverview()
-    minBelt()
-    warp()
-    #lockVeldspar()
+    #minBelt()
+    #warp()
     #aproch()
     #scan()      
-    #scanedVeldpar5k()
+    scanedVeldpar5k()
+    #lockVeldspar()
     #aproch()
     #lock()
     #ActivateMiners() 
@@ -39,12 +37,10 @@ def undock():
     pyautogui.moveTo(bt_ux, bt_uy)
     pyautogui.click()
     print("Undocking...")   
-    #TODO: da undock mas depois n sabe se já saiu
+    #mete rato num sitio neutro
+    pyautogui.moveTo(100, 100)
     time.sleep(13)
     
-    
-
-
 def miningOverview():
     #go to mining belt
     button = pyautogui.locateOnScreen('images/MiningOverview.png', confidence=0.9)
@@ -53,13 +49,14 @@ def miningOverview():
     btUx, btUy = buttonPos
     pyautogui.moveTo(btUx, btUy)
     pyautogui.click()
+    time.sleep(2)
 
 def minBelt():
     # Mining Overview
-    listaBelts = pyautogui.locateAllOnScreen('images/AsteroidBelt.png', confidence=0.9)
+    listaBelts = list(pyautogui.locateAllOnScreen('images/AsteroidBelt.png', confidence=0.9))
 
     # Get the total number of belts
-    total_belts = len(list(listaBelts))
+    total_belts = len(listaBelts)
 
     print("Total belts:", total_belts)
     
@@ -67,16 +64,15 @@ def minBelt():
         print("No asteroid belts found.")
         return
 
-    random_number = random.randint(0, total_belts)
+    random_number = random.randint(0, total_belts - 1)
     print("Selected belt number:", random_number)
 
-    #TODO: n consigo aceder ao btbelt tem a ver com a variavel
-    for i, belt in list(listaBelts):
+    for i, belt in enumerate(listaBelts):
         if i == random_number:
-            btbeltx, btbelty = belt[0][0], belt[1][1]
+            btbeltx, btbelty = belt[0], belt[1]
             print("Selected belt coordinates:", btbeltx, btbelty)
 
-    pyautogui.moveTo(btbeltx, btbelty - 15)
+    pyautogui.moveTo(btbeltx, btbelty)
     pyautogui.click()
     print("Asteroid belt selected...")
     time.sleep(2)
@@ -85,58 +81,79 @@ def warp():
     #go to mining belt
     button = pyautogui.locateOnScreen('images/warpButton.png', confidence=0.9)
     buttonPos=pyautogui.center(button)
-    print("Opening MiningOverview!")
+    print("Selectingwarp!")
     btUx, btUy = buttonPos
     pyautogui.moveTo(btUx, btUy)
     pyautogui.click()
-    time.sleep(30)
-
-def scanedVeldpar5k():
-    #ve se existe astroids
-    existe = pyautogui.locateOnScreen('scanedVeldspar.png', confidence=0.4)
-    if existe == None: 
-        print("Doesnt exist veldspar!")  
-        stationDock()
-        transferMiningHold()
-        main()
-    else:
-        listasteroid = pyautogui.locateAllOnScreen('scanedVeldspar.png', confidence=0.4)
-        #seleciona todos os asteroides e escolhe o ultimo da lista, 
-        #neste caso o asteroide com mais veldespar
-
-        for asteroid in listasteroid: 
-            if  asteroid[1] > 1: 
-                btLsx= asteroid[0]+15
-                btLsy= asteroid[1]+10 
-        
-        pyautogui.moveTo(btLsx, btLsy)
-        pyautogui.click()
-        print("Locked veldspar...")
-        time.sleep(2)  
+    print("Waiting")
+    for each in range(0,35):
+            print("Waiting", each ," sec")
+            time.sleep(1)
 
 def scan():
-    pyautogui.moveTo(1123, 948)
+    button = pyautogui.locateOnScreen('images/scanner.png', confidence=0.9)
+    print("Scanning")
+    buttonPos=pyautogui.center(button)
+    btUx, btUy = buttonPos
+    pyautogui.moveTo(btUx, btUy)
     pyautogui.click()
-    print("Scanning asteroid belt 8")
     time.sleep(9)
 
 def aproch():
-    #go to mining belt
-    btAx=1585
-    btAy=120
-    
-    pyautogui.moveTo(btAx, btAy)
+
+    button = pyautogui.locateOnScreen('images/scorditeOre.png', confidence=0.9)
+    print("Selecting scordite")
+    buttonPos=pyautogui.center(button)
+    btUx, btUy = buttonPos
+    pyautogui.moveTo(btUx, btUy)
     pyautogui.click()
+    
+    # Press the "W" key
+    pyautogui.press('w')
+
     print("Aproching...")
     for each in range(0,35):
             print("Aproching in", each ," sec")
             time.sleep(1)
 
+#TODO:fiquei aqui
+def scanedVeldpar5k():
+    #ve se existe astroids
+    button = pyautogui.locateOnScreen('images/scorditeCondensado.png', confidence=0.9)
+    buttonPos=pyautogui.center(button)
+    btUx, btUy = buttonPos
+    pyautogui.moveTo(btUx, btUy)
+    pyautogui.click()
+    if button == None: 
+        print("Doesnt exist scordite!")  
+        
+    else:
+        listasteroid = pyautogui.locateAllOnScreen('images/scannedScordite.png', confidence=0.5)
+        #seleciona todos os asteroides e escolhe o ultimo da lista, 
+        #neste caso o asteroide com mais veldespar
+        print(enumerate(listasteroid))
+        for asteroid in listasteroid: 
+            if  asteroid[1] > 1: 
+                btLsx= asteroid[0]
+                btLsy= asteroid[1]
+        
+        print("x:"+ str(btLsx) + "y:" + str(btLsy)) 
+        pyautogui.moveTo(btLsx, btLsy)
+        pyautogui.click()
+        
+        #orbit 
+        # Press the "W" key
+        pyautogui.press('w')
+        
+        print("Scordite Selected")
+        time.sleep(2)  
+
 def lock():
-    #go to mining belt
-    btLcx=1707
-    btLcy=112
-    pyautogui.moveTo(btLcx, btLcy)
+    #lock scordite
+    button = pyautogui.locateOnScreen('images/scorditeCondensado.png', confidence=0.9)
+    buttonPos=pyautogui.center(button)
+    btUx, btUy = buttonPos
+    pyautogui.moveTo(btUx, btUy)
     pyautogui.click()
     print("Target Locked...")
     time.sleep(2)
